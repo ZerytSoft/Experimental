@@ -1,15 +1,18 @@
 package tk.zeryter.main.GUI;
 
 import java.awt.*;
+import java.awt.image.*;
 
-public class Canvas extends java.awt.Canvas implements Runnable {
+public class Canvas extends java.awt.Canvas {
 
-    public void run(){
-
-    }
+    Image test;
 
     public void paint(Graphics g){
-        g.drawLine(10,10,40,40);
+
+        test = Toolkit.getDefaultToolkit().getImage("assets/test.png");
+
+        g.drawImage(test,10,10,this);
+        g.drawLine(0,getHeight()/2,getWidth(),getHeight()/2);
     }
 
 }

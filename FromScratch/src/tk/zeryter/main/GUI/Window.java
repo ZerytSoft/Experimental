@@ -8,7 +8,7 @@ public class Window implements Runnable{
 
         Frame window = new Frame("PlaceHolderText");
         window.add(new Canvas());
-        window.setSize(800,600);
+        window.setSize(400,400);
         window.setVisible(true);
         window.addWindowListener(new WindowMonitor());
 
