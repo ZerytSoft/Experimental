@@ -1,14 +1,18 @@
 package tk.zeryter.gltriangle.Window;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import tk.zeryter.gltriangle.Input;
 
 public class Render implements Runnable {
 
-    double rotation = Math.PI / 2;
-    double rotationAdd = Math.PI / 240;
+    public double rotation = Math.PI / 2;
+    public double rotationAdd = Math.PI / 24000000;
+
+    public boolean rendering = true;
 
     public void run() {
         render();
@@ -37,6 +41,14 @@ public class Render implements Runnable {
         GL11.glOrtho(0, Display.getWidth(), 0, Display.getHeight(), 1, -1);    //This sets up the render space for open GL pixW is width pixH is Height
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
+        try {
+            Keyboard.create();
+        } catch (LWJGLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        new Thread(new Input()).start();
+
         while (!Display.isCloseRequested()) {
 
             int currentHeight = Display.getHeight(), currentWidth = Display.getWidth();
@@ -48,13 +60,11 @@ public class Render implements Runnable {
             Display.update();
 
             try {
-                Thread.sleep(60);
+                Thread.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-
-            rotation = rotation + rotationAdd;
-
+            /*
             if (!(currentHeight == Display.getHeight()) | !(currentWidth == Display.getWidth())) {
 
                 displayMode = new DisplayMode(Display.getWidth(), Display.getHeight());
@@ -64,17 +74,20 @@ public class Render implements Runnable {
                 GL11.glOrtho(0, Display.getWidth(), 0, Display.getHeight(), 1, -1);    //This sets up the render space for open GL pixW is width pixH is Height
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);
             }
+            */
 
         }
+
+        rendering = false;
 
         Display.destroy();
 
     }
 
-    public void triangle(int x, int y, double asdfrotation) {
+    public void triangle(int x, int y, double rotation) {
 
-        int[] xPos = {x + (int) (7 * Math.sqrt(5) * Math.cos(asdfrotation + (5 * Math.PI) / 4)), x + (int) (15 * Math.cos(asdfrotation)), x + (int) (7 * Math.sqrt(5) * Math.cos(asdfrotation + (3 * Math.PI) / 4))};
-        int[] yPos = {y + (int) (7 * Math.sqrt(5) * Math.sin(asdfrotation + (5 * Math.PI) / 4)), y + (int) (15 * Math.sin(asdfrotation)), y + (int) (7 * Math.sqrt(5) * Math.sin(asdfrotation + (3 * Math.PI) / 4))};
+        int[] xPos = {x + (int) (7 * Math.sqrt(5) * Math.cos(rotation + (5 * Math.PI) / 4)), x + (int) (15 * Math.cos(rotation)), x + (int) (7 * Math.sqrt(5) * Math.cos(rotation + (3 * Math.PI) / 4))};
+        int[] yPos = {y + (int) (7 * Math.sqrt(5) * Math.sin(rotation + (5 * Math.PI) / 4)), y + (int) (15 * Math.sin(rotation)), y + (int) (7 * Math.sqrt(5) * Math.sin(rotation + (3 * Math.PI) / 4))};
 
         GL11.glColor3d(0,1,0);
 

@@ -5,11 +5,13 @@ import tk.zeryter.gltriangle.Window.Window;
 
 public class GLTriangleMain {
 
+    public static Render renderMain = new Render();
+
     public static void main(String[] args){
 
         //new Thread(new Window()).start();
 
-        new Thread(new Render()).start();
+        new Thread(renderMain).start();
 
     }
 
