@@ -10,7 +10,7 @@ import tk.zeryter.gltriangle.Input;
 public class Render implements Runnable {
 
     public double rotation = Math.PI / 2;
-    public double rotationAdd = Math.PI / 24000000;
+    public double rotationAdd = Math.PI / 20000000;
 
     public boolean rendering = true;
 
@@ -86,8 +86,8 @@ public class Render implements Runnable {
 
     public void triangle(int x, int y, double rotation) {
 
-        int[] xPos = {x + (int) (7 * Math.sqrt(5) * Math.cos(rotation + (5 * Math.PI) / 4)), x + (int) (15 * Math.cos(rotation)), x + (int) (7 * Math.sqrt(5) * Math.cos(rotation + (3 * Math.PI) / 4))};
-        int[] yPos = {y + (int) (7 * Math.sqrt(5) * Math.sin(rotation + (5 * Math.PI) / 4)), y + (int) (15 * Math.sin(rotation)), y + (int) (7 * Math.sqrt(5) * Math.sin(rotation + (3 * Math.PI) / 4))};
+        int[] xPos = {x + (int) (10 * Math.sqrt(5) * Math.cos(rotation + (5 * Math.PI) / 4)), x + (int) (20 * Math.cos(rotation)), x + (int) (10 * Math.sqrt(5) * Math.cos(rotation + (3 * Math.PI) / 4))};
+        int[] yPos = {y + (int) (10 * Math.sqrt(5) * Math.sin(rotation + (5 * Math.PI) / 4)), y + (int) (20 * Math.sin(rotation)), y + (int) (10 * Math.sqrt(5) * Math.sin(rotation + (3 * Math.PI) / 4))};
 
         GL11.glColor3d(0,1,0);
 
